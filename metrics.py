@@ -7,6 +7,7 @@ import termplotlib as tpl
 import plotext as pltx
 from urllib.parse import parse_qs, urlparse
 from urllib.request import urlopen, Request
+from colored import fg
 from utils import get_keys
 from utils import create_table
 from utils import create_other_table
@@ -88,31 +89,32 @@ def get_commit_freq(username:str, repo_data:json) -> dict:
 
 def main(): 
     # Create the parser and add arguments
+    green = "\033[1;32m "
     parser = argparse.ArgumentParser()
     parser.add_argument(dest='username', type=str, help="Enter GitHub username")
 
-      
     # Parse and print the results
     args = parser.parse_args()
     username = args.username
     data = authenticate(username)
 
-    print("TOTAL NUMBER OF PUBLIC REPOSITORIES: ",  str(get_total_repos(username)) + '\n\n')
+    print(fg('magenta') + "Total number of public repositories: " + green +  str(get_total_repos(username)) + '\n\n')
 
     lang_freq = get_freq_used_lang(username, data)
-    print("MOST FREQUENTLY USED PROGRAMMING LANGUAGE(S): " + get_keys(lang_freq))
-    print(str(create_table(lang_freq, 'Language', 'Frequency')) + '\n \n')
+    print(fg('magenta') + "Most frequently used programming language(s): " + green + get_keys(lang_freq))
+    print(fg('white') + str(create_table(lang_freq, 'Language', 'Frequency')) + '\n \n')
 
     fork_count = get_most_forked(data)
-    print("MOST FORKED REPOSITORIES: " + get_keys(fork_count))
-    print(str(create_table(fork_count, 'Repository', 'Fork Count')) + '\n \n')
+    print(fg('magenta')  + "Most forked repositories: " + green + get_keys(fork_count))
+    print(fg('white') + str(create_table(fork_count, 'Repository', 'Fork Count')) + '\n \n')
 
     star_count = get_most_starred(data)
-    print("MOST STARRED REPOSITORIES: " + get_keys(star_count))
-    print(str(create_table(star_count, 'Repository', 'Star Count')) + '\n \n')
+    print(fg('magenta') + "Most starred repositories: " + green + get_keys(star_count))
+    print(fg('white') + str(create_table(star_count, 'Repository', 'Star Count')) + '\n \n')
 
     weekly_commit = get_commit_freq(username, data)
-    print('WEEKLY COMMITS \n' + str(create_other_table(weekly_commit, 'Week', 'Commit Count')))
+    print(fg('magenta') + 'Weekly Commits \n' + 
+        fg('white') + str(create_other_table(weekly_commit, 'Week', 'Commit Count')))
 
 
 if __name__ == '__main__':
