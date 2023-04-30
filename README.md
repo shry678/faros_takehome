@@ -1,4 +1,28 @@
 # GitHub Analyzer Project (Faros AI Take Home)
 
 
-create a README file with instructions on how to set up, run, and test the application.
+
+## Set Up 
+
+### Requirements 
+| Technology | Version |
+| ------------- | ------------- |
+| Python | v3.10.11  |
+| Pip  | v23.1.2  |
+
+
+
+## Run 
+
+
+
+
+## Test
+
+
+
+## Helpful Links
+
+
+
+Code Documentation 
