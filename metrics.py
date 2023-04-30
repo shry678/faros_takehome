@@ -68,8 +68,83 @@ def get_most_forked(repo_data:json) -> dict:
     return fork_count
 
 
+# returns weekly frequency of commits over one year period
+def get_commit_freq(username:str, repo_data:json) -> dict:
+    weekly_commit = dict()
+    for repo in repo_data:
+        url = base_url + 'repos/' + username + '/' + repo['name'] + '/stats/participation'
+        commit_data = requests.get(url, auth=(username, access_token))
+        count = 1
+        for stat in commit_data.json()['owner']:
+            curr_week = 'W' + str(count)
+            weekly_commit[curr_week] = weekly_commit.get(curr_week, 0) + stat
+            count += 1
+
+    return weekly_commit
+
+
+# 
+# 
+
+# find keys with specific value and return as str
+def get_keys(dict:dict) ->str:
+    val = max(dict.values())
+    if val == 0:
+        return 'None'
+
+    res = ''
+    for key in dict.keys():
+        if val == dict.get(key):
+            res += key + ", "
+    
+    return res[:-2]
+
+
+def create_table(dict:dict, col1:str, col2:str) -> PrettyTable:
+    table = PrettyTable([col1, col2])
+    for key in dict:
+        table.add_row([key, dict[key]])
+
+    table.sortby = col2
+    table.reversesort = True
+    return table
+
+
+def create_other_table(dict:dict, col1:str, col2:str) -> PrettyTable:
+    table = PrettyTable([col1, col2])
+    for key in dict:
+        table.add_row([key, dict[key]])
+
+    return table
+
 
 def main(): 
+    # Create the parser and add arguments
+    parser = argparse.ArgumentParser()
+    parser.add_argument(dest='username', type=str, help="Enter GitHub username")
+
+    args = parser.parse_args()  
+    # Parse and print the results
+    username = args.username
+    data = authenticate(username)
+
+    print("TOTAL NUMBER OF PUBLIC REPOSITORIES: ",  str(get_total_repos(username)) + '\n\n')
+
+    lang_freq = get_freq_used_lang(username, data)
+    print("MOST FREQUENTLY USED PROGRAMMING LANGUAGE(S): " + get_keys(lang_freq))
+    print(str(create_table(lang_freq, 'Language', 'Frequency')) + '\n \n')
+
+    fork_count = get_most_forked(data)
+    print("MOST FORKED REPOSITORIES: " + get_keys(fork_count))
+    print(str(create_table(fork_count, 'Repository', 'Fork Count')) + '\n \n')
+
+    star_count = get_most_starred(data)
+    print("MOST STARRED REPOSITORIES: " + get_keys(star_count))
+    print(str(create_table(star_count, 'Repository', 'Star Count')) + '\n \n')
+
+    weekly_commit = get_commit_freq(username, data)
+    print('WEEKLY COMMITS \n' + str(create_other_table(weekly_commit, 'Week', 'Commit Count')))
+
 
 if __name__ == '__main__':
     main()
