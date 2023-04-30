@@ -1,4 +1,4 @@
-# GitHub Analyzer Project (Faros AI Take Home)
+# GitHub Analyzer Project
 
 
 
@@ -11,8 +11,8 @@
 | Pip  | v23.1.2  |
 
 
-`pip install requests`
-`pip install numpy`
+```pip install requests```
+```pip install numpy```
 `pip install pandas`
 `pip install prettytable`
 `pip install matplotlib`
