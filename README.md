@@ -1,11 +1,13 @@
 # GitHub Analyzer Project
 
+This project creates a Command Line Interface (CLI) that displays relevent metrics related to a GitHub user. 
 
 
 ## Set Up 
-Follow these steps after cloning this repository: 
+After **cloning this repository**, take a look at the technologies and dependencies required to successfully deploy the CLI locally. 
 
 #### Requirements 
+This project was developed with the following: 
 | Technology | Version |
 | ------------- | ------------- |
 | Python | v3.10+  |
@@ -13,32 +15,33 @@ Follow these steps after cloning this repository:
 
 
 #### Dependencies 
+Run the following dependencies in command line
 ```
-    pip install requests
-```
-
-```
-    pip install numpy
+pip install requests  
 ```
 
 ```
-    pip install pandas
+pip install numpy
 ```
 
 ```
-    pip install prettytable
+pip install pandas
 ```
 
 ```
-    pip install matplotlib
+pip install prettytable
 ```
 
 ```
-    pip install termplotlib
+pip install matplotlib
 ```
 
 ```
-    pip install plotext
+pip install termplotlib
+```
+
+```
+pip install plotext
 ```
 
 
@@ -48,6 +51,7 @@ Follow these steps after cloning this repository:
 
 ## Run 
 
+The CLI uses argparser to take in arguments and output the user-specified output.
 
 
 
