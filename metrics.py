@@ -1,23 +1,22 @@
 import requests 
-import numpy as np
-from urllib.parse import parse_qs, urlparse
-from urllib.request import urlopen, Request
 import json
 import csv
-from github import Github
 import argparse
-import pandas as pd
 import matplotlib.pyplot as plt
 import termplotlib as tpl
 import plotext as pltx
-from prettytable import PrettyTable
+from urllib.parse import parse_qs, urlparse
+from urllib.request import urlopen, Request
+from utils import get_keys
+from utils import create_table
+from utils import create_other_table
 
 base_url = 'https://api.github.com/'
 access_token = "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"
 user = 'shry678'
 
 
-# verify username exists and retrieve user's repo data
+# verify username exists and retrieve user's repository data
 def authenticate(username:str) -> json:
     try:
         repo_data = requests.get(base_url + 'users/' + username + '/repos', auth=(user,access_token))
@@ -39,6 +38,8 @@ def get_total_repos(username:str) -> int:
 # returns the most frequently used programming languages
 def get_freq_used_lang(username:str, repo_data:json) -> dict:
     lang_freq = dict()
+
+    # look at each repo to count frequency of each language 
     for repo in repo_data:
         url = base_url + 'repos/' + username + '/' + repo['name'] + '/languages'
         lang_data = requests.get(url, auth=(user, access_token))
@@ -48,7 +49,7 @@ def get_freq_used_lang(username:str, repo_data:json) -> dict:
     return lang_freq
 
 
-# returns most starred repositories
+# returns dict to track 
 def get_most_starred(repo_data:json) -> dict:
     star_count = dict()
     for repo in repo_data:
@@ -71,6 +72,8 @@ def get_most_forked(repo_data:json) -> dict:
 # returns weekly frequency of commits over one year period
 def get_commit_freq(username:str, repo_data:json) -> dict:
     weekly_commit = dict()
+
+    # for each repo, parse 
     for repo in repo_data:
         url = base_url + 'repos/' + username + '/' + repo['name'] + '/stats/participation'
         commit_data = requests.get(url, auth=(username, access_token))
@@ -83,48 +86,14 @@ def get_commit_freq(username:str, repo_data:json) -> dict:
     return weekly_commit
 
 
-# 
-# 
-
-# find keys with specific value and return as str
-def get_keys(dict:dict) ->str:
-    val = max(dict.values())
-    if val == 0:
-        return 'None'
-
-    res = ''
-    for key in dict.keys():
-        if val == dict.get(key):
-            res += key + ", "
-    
-    return res[:-2]
-
-
-def create_table(dict:dict, col1:str, col2:str) -> PrettyTable:
-    table = PrettyTable([col1, col2])
-    for key in dict:
-        table.add_row([key, dict[key]])
-
-    table.sortby = col2
-    table.reversesort = True
-    return table
-
-
-def create_other_table(dict:dict, col1:str, col2:str) -> PrettyTable:
-    table = PrettyTable([col1, col2])
-    for key in dict:
-        table.add_row([key, dict[key]])
-
-    return table
-
-
 def main(): 
     # Create the parser and add arguments
     parser = argparse.ArgumentParser()
     parser.add_argument(dest='username', type=str, help="Enter GitHub username")
 
-    args = parser.parse_args()  
+      
     # Parse and print the results
+    args = parser.parse_args()
     username = args.username
     data = authenticate(username)
 
