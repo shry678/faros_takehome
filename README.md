@@ -17,13 +17,31 @@ Follow these steps after cloning this repository:
     pip install requests
 ```
 
+```
+    pip install numpy
+```
 
-```pip install numpy```
-`pip install pandas`
-`pip install prettytable`
-`pip install matplotlib`
-`pip install termplotlib`
-`pip install plotext`
+```
+    pip install pandas
+```
+
+```
+    pip install prettytable
+```
+
+```
+    pip install matplotlib
+```
+
+```
+    pip install termplotlib
+```
+
+```
+    pip install plotext
+```
+
+
 
 
 
