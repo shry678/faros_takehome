@@ -3,15 +3,21 @@
 
 
 ## Set Up 
+Follow these steps after cloning this repository: 
 
 #### Requirements 
 | Technology | Version |
 | ------------- | ------------- |
-| Python | v3.10.11  |
-| Pip  | v23.1.2  |
+| Python | v3.10+  |
+| Pip  | v23.1+  |
 
 
-```pip install requests```
+#### Dependencies 
+```
+    pip install requests
+```
+
+
 ```pip install numpy```
 `pip install pandas`
 `pip install prettytable`
