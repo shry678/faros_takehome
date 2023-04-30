@@ -8,7 +8,8 @@ After **cloning this repository**, take a look at the technologies and dependenc
 
 ### Requirements 
 This project was developed with the following: 
-
+| Technology | Version |
+| ------------- | ------------- |
 | Python | v3.10+  |
 | Pip  | v23.1+  |
 
