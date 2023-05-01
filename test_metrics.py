@@ -7,7 +7,7 @@ base_url = metrics.base_url
 access_token = metrics.access_token
 user = metrics.user
 
-
+# unit tests for 
 class MetricsTest(unittest.TestCase):
     def test_authenticate(self):
         with open('test_data.json') as user_file:
@@ -27,7 +27,7 @@ class MetricsTest(unittest.TestCase):
         assert metrics.get_total_repos(user) == len(mock_json)
 
 
-    def test_get_freq_used_lang(self):
+    def test_get_lang_freq(self):
         with open('test_data.json') as user_file:
             data = user_file.read()
         
@@ -39,7 +39,7 @@ class MetricsTest(unittest.TestCase):
         assert mock_lang == lang
 
 
-    def test_get_most_starred(self):
+    def test_get_star_count(self):
         with open('test_data.json') as user_file:
             data = user_file.read()
         
@@ -50,7 +50,7 @@ class MetricsTest(unittest.TestCase):
         assert  next(iter(star_dict.values())) == mock_json[0]['stargazers_count']
 
 
-    def test_get_most_forked(self):
+    def test_get_fork_count(self):
         with open('test_data.json') as user_file:
             data = user_file.read()
         

@@ -1,5 +1,4 @@
 from prettytable import PrettyTable
-import json
 import matplotlib.pyplot as plt
 
 
@@ -37,9 +36,13 @@ def create_table(dict:dict, col1:str, col2:str) -> PrettyTable:
 
 def create_line_graph(dict:dict, name:str):
     labels, values = zip(*dict.items())
-    plt.bar(labels, values)
-    # plt.show()
-    plt.savefig(name + 'png', bbox_inches='tight')
+    fig, ax = plt.subplots()
+    plt.plot(values)
+    fig.autofmt_xdate()
+    plt.xticks(fontsize = 'xx-small')
+    plt.ylabel("Number of commits")
+    plt.xlabel("Week")
+    plt.savefig(name, bbox_inches='tight')
 
 
 def create_bar_graph(dict:dict, name:str):
@@ -48,11 +51,12 @@ def create_bar_graph(dict:dict, name:str):
     plt.bar(labels, values)
     fig.autofmt_xdate()
     plt.xticks(fontsize = 'xx-small')
+    plt.ylabel(name)
     plt.savefig(name, bbox_inches='tight')
+
 
 def create_pie_graph(dict:dict, name:str):
     labels = list(dict.keys())
     values = list(dict.values())
     plt.pie(values, labels=labels)
     plt.savefig(name, bbox_inches='tight')
-    
