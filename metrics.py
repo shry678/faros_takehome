@@ -122,7 +122,9 @@ def main():
         utils.save_json_data(all_dicts)
 
     if(graph):
-        utils.create_bar_graph(lang_freq)
+        utils.create_pie_graph(lang_freq, 'lang')
+        # utils.create_bar_graph(fork_count, 'fork')
+        # utils.create_bar_graph(star_count, 'star')
 
 
 if __name__ == '__main__':

@@ -2,6 +2,7 @@ from prettytable import PrettyTable
 import json
 import matplotlib.pyplot as plt
 
+
 # find keys with specific value and return as str
 def get_keys(dict:dict) ->str:
     val = max(dict.values())
@@ -33,14 +34,30 @@ def create_table(dict:dict, col1:str, col2:str) -> PrettyTable:
 
     return table
 
-def create_bar_graph(dict:dict):
+
+def create_bar_graph(dict:dict, name:str):
     labels, values = zip(*dict.items())
     plt.bar(labels, values)
     # plt.show()
-    plt.savefig('foo.png', bbox_inches='tight')
+    plt.savefig(name + 'png', bbox_inches='tight')
+
+
+def create_bar_graph(dict:dict, name:str):
+    labels, values = zip(*dict.items())
+    fig, ax = plt.subplots()
+    plt.bar(labels, values)
+    fig.autofmt_xdate()
+    plt.xticks(fontsize = 'xx-small')
+    plt.savefig(name, bbox_inches='tight')
+
+def create_pie_graph(dict:dict, name:str):
+    labels = list(dict.keys())
+    values = list(dict.values())
+    plt.pie(values, labels=labels)
+    plt.savefig(name, bbox_inches='tight')
 
 
 # saves json data to csv
 def save_json_data( dict:dict):
-    with open("sample.json", "w") as outfile: 
+    with open("retrieved_data.json", "w") as outfile: 
         json.dump(dict, outfile, indent=4)
