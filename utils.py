@@ -35,7 +35,7 @@ def create_table(dict:dict, col1:str, col2:str) -> PrettyTable:
     return table
 
 
-def create_bar_graph(dict:dict, name:str):
+def create_line_graph(dict:dict, name:str):
     labels, values = zip(*dict.items())
     plt.bar(labels, values)
     # plt.show()
