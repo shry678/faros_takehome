@@ -67,8 +67,8 @@ As you will see from the output, the CLI also accepts two optional flags:
 Try running the script with different usernames and the optional parameters. 
 
 Cases to try: 
-⋅⋅* Try entering a GitHub username that does not exist
-⋅⋅* Try running the command with a username with many repositories and save the graph images generated.
+- Try entering a GitHub username that does not exist
+- Try running the command with a username that has many repositories and save the graph images generated. 
 
 
 Unit tests are written in `metrics_test.py`. 
