@@ -30,7 +30,6 @@ pip install numpy
 pip install pandas
 ```
 
-PrettyTable allows us to display data in ASCII table
 ```
 pip install prettytable
 ```

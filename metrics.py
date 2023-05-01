@@ -1,6 +1,5 @@
 import requests 
 import json
-import csv
 import argparse
 import matplotlib.pyplot as plt
 import termplotlib as tpl
