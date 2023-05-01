@@ -17,35 +17,22 @@ This project was developed with the following:
 ### Dependencies 
 Run the following in command line to install the necessary dependencies 
 
-Needed to send HTTP requests using Python
+
 ```
 pip install requests  
 ```
-
-```
-pip install numpy
-```
-
-```
-pip install pandas
-```
-
 ```
 pip install prettytable
 ```
-
 ```
 pip install matplotlib
 ```
-
 ```
-pip install termplotlib
+pip install argparse
 ```
-
 ```
-pip install plotext
+pip install colored
 ```
-
 
 
 
