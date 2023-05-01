@@ -1,4 +1,5 @@
 from prettytable import PrettyTable
+import json
 
 # find keys with specific value and return as str
 def get_keys(dict:dict) ->str:
@@ -30,3 +31,8 @@ def create_other_table(dict:dict, col1:str, col2:str) -> PrettyTable:
         table.add_row([key, dict[key]])
 
     return table
+
+# saves json data to csv
+def save_json_data( dict:dict):
+    with open("sample.json", "w") as outfile: 
+        json.dump(dict, outfile, indent=4)

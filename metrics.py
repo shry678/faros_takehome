@@ -5,20 +5,20 @@ import argparse
 import matplotlib.pyplot as plt
 import termplotlib as tpl
 import plotext as pltx
-from urllib.parse import parse_qs, urlparse
-from urllib.request import urlopen, Request
 from colored import fg
 from utils import get_keys
 from utils import create_table
 from utils import create_other_table
+from utils import save_json_data
 
 base_url = 'https://api.github.com/'
 access_token = "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"
 user = 'shry678'
+save = False
 
 
 # verify username exists and retrieve user's repository data
-def authenticate(username:str) -> json:
+def authenticate(username:str, save:bool) -> json:
     try:
         repo_data = requests.get(base_url + 'users/' + username + '/repos', auth=(user,access_token))
         repo_data.raise_for_status()
@@ -92,11 +92,14 @@ def main():
     green = "\033[1;32m "
     parser = argparse.ArgumentParser()
     parser.add_argument(dest='username', type=str, help="Enter GitHub username")
+    parser.add_argument('--save', default=False, action='store_true', help = "optional flag to save data")
 
     # Parse and print the results
     args = parser.parse_args()
     username = args.username
-    data = authenticate(username)
+    save = args.save
+
+    data = authenticate(username, save)
 
     print(fg('magenta') + "Total number of public repositories: " + green +  str(get_total_repos(username)) + '\n\n')
 
@@ -115,6 +118,11 @@ def main():
     weekly_commit = get_commit_freq(username, data)
     print(fg('magenta') + 'Weekly Commits \n' + 
         fg('white') + str(create_other_table(weekly_commit, 'Week', 'Commit Count')))
+    
+    if(save):
+        all_dicts = {'lang_freq': lang_freq, 'fork_count': fork_count, 
+                     'star_count': star_count, 'weekly_freq':weekly_commit}
+        save_json_data(all_dicts)
 
 
 if __name__ == '__main__':
