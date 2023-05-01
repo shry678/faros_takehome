@@ -4,11 +4,13 @@ This project creates a Command Line Interface (CLI) that displays metrics for a 
 
 
 ## Set Up 
-Start by **cloning this repository**. 
+1. Start by **cloning this repository**. 
 
-Create a personal token in GitHub, following these [instructions](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token). The access token 
+2. Create a personal token in GitHub, following these [instructions](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token). The access token 
 
-Now, take a look at the technologies and dependencies required to successfully run the CLI locally!
+3. Open metrics.py. Update the access_token and user fields in this file with your own token and username.
+
+4. Now, take a look at the technologies and dependencies required to successfully run the CLI locally!
 
 ### Requirements 
 This project was developed with the following: 
@@ -42,8 +44,7 @@ pip install colored
 ## Run 
 Now that set up is complete, you can run the CLI! Follow these steps: 
 1. Navigate to the cloned repository's directory in command line, if you haven't already done so.
-2. Open `metrics.py`. Update the `access_token` and `user` fields in this file with your own credentials. 
-3. Run the following script, entering in the GitHub username you would like to see metrics for. `github_username` is a required argument
+2. Run the following script, entering in the GitHub username you would like to see metrics for. `github_username` is a required argument
 
 ```
 python3 metrics.py <github_username>
@@ -68,18 +69,26 @@ Try running the script with different usernames and the optional parameters.
 
 Cases to try: 
 - Try entering a GitHub username that does not exist
-- Try running the command with a username that has many repositories and save the graph images generated. 
+- Try running the command with a username that has many repositories and save the graph images generated. i.e. `postmodern` 
 
 
-Unit tests are written in `metrics_test.py`. 
+Unit tests are written in `metrics_test.py`. The unit tests compare the actual responses to mock JSON data. 
 Run the following command to run the tests: 
 ```
 python3 -m unittest metrics_test.py
 ```
-The unit tests compare the actual responses to the 
 
 
 ## Helpful Links
+- [Endpoints Available for GitHub Apps](https://docs.github.com/en/rest/overview/endpoints-available-for-github-apps?apiVersion=2022-11-28) - this documentation gives you an idea of requests you can make and useful metrics you can calculate 
+
+- [PrettyTable Library](https://pypi.org/project/prettytable/) - this library is used to print ASCII tables
+
+- [MatPlotLib Library](https://pypi.org/project/matplotlib/) - this library creates visualization, like various graphs
+
+- [ArgsParse](https://docs.python.org/3/library/argparse.html) - parser for command-line options and arguments
+
+- [Colored Library](https://pypi.org/project/colored/) - this library is used for color and formatting in command line
 
 
 
