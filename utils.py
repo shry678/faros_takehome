@@ -16,7 +16,7 @@ def get_keys(dict:dict) ->str:
     return res[:-2]
 
 
-def create_table(dict:dict, col1:str, col2:str) -> PrettyTable:
+def create_sorted_table(dict:dict, col1:str, col2:str) -> PrettyTable:
     table = PrettyTable([col1, col2])
     for key in dict:
         table.add_row([key, dict[key]])
@@ -26,7 +26,7 @@ def create_table(dict:dict, col1:str, col2:str) -> PrettyTable:
     return table
 
 
-def create_other_table(dict:dict, col1:str, col2:str) -> PrettyTable:
+def create_table(dict:dict, col1:str, col2:str) -> PrettyTable:
     table = PrettyTable([col1, col2])
     for key in dict:
         table.add_row([key, dict[key]])

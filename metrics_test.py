@@ -1,7 +1,5 @@
 import metrics
-import requests
 import unittest
-import test
 import json
 
 
@@ -35,8 +33,8 @@ class MetricsTest(unittest.TestCase):
         
         mock_json = json.loads(data)
         response = metrics.authenticate(user)
-        mock_lang = metrics.get_freq_used_lang(user, mock_json)
-        lang = metrics.get_freq_used_lang(user, response)
+        mock_lang = metrics.get_lang_freq(user, mock_json)
+        lang = metrics.get_lang_freq(user, response)
 
         assert mock_lang == lang
 
@@ -47,7 +45,7 @@ class MetricsTest(unittest.TestCase):
         
         mock_json = json.loads(data)
         response = metrics.authenticate(user)
-        star_dict = metrics.get_most_forked(response)
+        star_dict = metrics.get_star_count(response)
 
         assert  next(iter(star_dict.values())) == mock_json[0]['stargazers_count']
 
@@ -58,7 +56,7 @@ class MetricsTest(unittest.TestCase):
         
         mock_json = json.loads(data)
         response = metrics.authenticate(user)
-        fork_dict = metrics.get_most_forked(response)
+        fork_dict = metrics.get_fork_count(response)
 
         assert next(iter(fork_dict.values())) == mock_json[0]['forks_count']
 
@@ -78,17 +76,3 @@ class MetricsTest(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-
-
-
-
-
-
-
-
-# assert response.status_code == 200
-
-# python3 -m unittest metrics_test.py
-
-
-

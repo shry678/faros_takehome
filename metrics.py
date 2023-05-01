@@ -1,15 +1,13 @@
 import requests 
 import json
 import argparse
-import matplotlib.pyplot as plt
-import termplotlib as tpl
-import plotext as pltx
 from colored import fg
 import utils
 
-base_url = 'https://api.github.com/'
+
 access_token = "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"
 user = 'shry678'
+base_url = 'https://api.github.com/'
 
 
 # verify username exists and retrieve user's repository data
@@ -31,8 +29,8 @@ def get_total_repos(username:str) -> int:
     return response.json()['public_repos']
 
 
-# returns the most frequently used programming languages
-def get_freq_used_lang(username:str, repo_data:json) -> dict:
+# returns dict with frequency of each language
+def get_lang_freq(username:str, repo_data:json) -> dict:
     lang_freq = dict()
 
     # look at each repo to count frequency of each language 
@@ -45,8 +43,8 @@ def get_freq_used_lang(username:str, repo_data:json) -> dict:
     return lang_freq
 
 
-# returns dict to track 
-def get_most_starred(repo_data:json) -> dict:
+# returns dict with number of stars for each repo
+def get_star_count(repo_data:json) -> dict:
     star_count = dict()
     for repo in repo_data:
         count = repo['stargazers_count']
@@ -55,8 +53,8 @@ def get_most_starred(repo_data:json) -> dict:
     return star_count
 
 
-# returns most forked repositories
-def get_most_forked(repo_data:json) -> dict:
+# returns number of forks for each repo
+def get_fork_count(repo_data:json) -> dict:
     fork_count = dict()
     for repo in repo_data:
         count = repo['forks_count']
@@ -103,20 +101,20 @@ def main():
 
     print(mg + "Total number of public repositories: " + gr +  str(get_total_repos(username)) + '\n\n')
 
-    lang_freq = get_freq_used_lang(username, data)
+    lang_freq = get_lang_freq(username, data)
     print(mg + "Most frequently used programming language(s): " + gr + utils.get_keys(lang_freq))
-    print(wh + str(utils.create_table(lang_freq, 'Language', 'Frequency')) + '\n \n')
+    print(wh + str(utils.create_sorted_table(lang_freq, 'Language', 'Frequency')) + '\n \n')
 
-    fork_count = get_most_forked(data)
+    fork_count = get_fork_count(data)
     print(mg  + "Most forked repositories: " + gr + utils.get_keys(fork_count))
-    print(wh + str(utils.create_table(fork_count, 'Repository', 'Fork Count')) + '\n \n')
+    print(wh + str(utils.create_sorted_table(fork_count, 'Repository', 'Fork Count')) + '\n \n')
 
-    star_count = get_most_starred(data)
+    star_count = get_star_count(data)
     print(mg + "Most starred repositories: " + gr + utils.get_keys(star_count))
-    print(wh + str(utils.create_table(star_count, 'Repository', 'Star Count')) + '\n \n')
+    print(wh + str(utils.create_sorted_table(star_count, 'Repository', 'Star Count')) + '\n \n')
 
     weekly_commit = get_commit_freq(username, data)
-    print(mg + 'Weekly Commits \n' + wh + str(utils.create_other_table(weekly_commit, 'Week', 'Commit Count')))
+    print(mg + 'Weekly Commits \n' + wh + str(utils.create_table(weekly_commit, 'Week', 'Commit Count')))
     
     if(save):
         all_dicts = {'lang_freq': lang_freq, 'fork_count': fork_count, 
