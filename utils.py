@@ -63,3 +63,4 @@ def create_pie_graph(dict:dict, name:str):
     values = list(dict.values())
     plt.pie(values, labels=labels)
     plt.savefig(name, bbox_inches='tight')
+
