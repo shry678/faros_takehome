@@ -55,9 +55,4 @@ def create_pie_graph(dict:dict, name:str):
     values = list(dict.values())
     plt.pie(values, labels=labels)
     plt.savefig(name, bbox_inches='tight')
-
-
-# saves json data to csv
-def save_json_data( dict:dict):
-    with open("retrieved_data.json", "w") as outfile: 
-        json.dump(dict, outfile, indent=4)
+    

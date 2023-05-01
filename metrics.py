@@ -119,7 +119,9 @@ def main():
     if(save):
         all_dicts = {'lang_freq': lang_freq, 'fork_count': fork_count, 
                      'star_count': star_count, 'weekly_freq':weekly_commit}
-        utils.save_json_data(all_dicts)
+        
+        with open("retrieved_data.json", "w") as outfile: 
+            json.dump(dict, outfile, indent=4)
 
     if(graph):
         utils.create_pie_graph(lang_freq, 'lang')
@@ -129,3 +131,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+    

@@ -6,9 +6,9 @@ This project creates a Command Line Interface (CLI) that displays metrics for a 
 ## Set Up 
 1. Start by **cloning this repository**. 
 
-2. Create a personal token in GitHub, following these [instructions](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token). The access token 
+2. Create a personal token in GitHub, following these [instructions](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token). The access token authenticates your requests. Without an access token, you are heavily limited in requests (60 requests/hour). 
 
-3. Open metrics.py. Update the access_token and user fields in this file with your own token and username.
+3. Open `metrics.py`. Update the `access_token` and `user` fields in this file with your own token and username.
 
 4. Now, take a look at the technologies and dependencies required to successfully run the CLI locally!
 
@@ -57,7 +57,7 @@ python3 metrics.py -h
 ```
 As you will see from the output, the CLI also accepts two optional flags: 
 
-` --save` : optional flag to save data retrieved
+` --save` : optional flag to save data retrieved in JSON file
 
 `--gr` : optional flag to generate and save graph images
 
@@ -69,10 +69,10 @@ Try running the script with different usernames and the optional parameters.
 
 Cases to try: 
 - Try entering a GitHub username that does not exist
-- Try running the command with a username that has many repositories and save the graph images generated. i.e. `postmodern` 
+- Try running the command with a username that has many repositories (i.e. user: `postmodern`) and save the graph images generated.  
 
 
-Unit tests are written in `metrics_test.py`. The unit tests compare the actual responses to mock JSON data. 
+Unit tests are written in `metrics_test.py`. The unit tests compare the actual API responses to mock JSON data. 
 Run the following command to run the tests: 
 ```
 python3 -m unittest metrics_test.py
@@ -80,15 +80,15 @@ python3 -m unittest metrics_test.py
 
 
 ## Helpful Links
-- [Endpoints Available for GitHub Apps](https://docs.github.com/en/rest/overview/endpoints-available-for-github-apps?apiVersion=2022-11-28) - this documentation gives you an idea of requests you can make and useful metrics you can calculate 
+- [Endpoints Available for GitHub Apps](https://docs.github.com/en/rest/overview/endpoints-available-for-github-apps?apiVersion=2022-11-28) - this documentation gives you an idea of requests you can make
 
-- [PrettyTable Library](https://pypi.org/project/prettytable/) - this library is used to print ASCII tables
+- [PrettyTable Library](https://pypi.org/project/prettytable/) - library used to print ASCII tables
 
-- [MatPlotLib Library](https://pypi.org/project/matplotlib/) - this library creates visualization, like various graphs
+- [MatPlotLib Library](https://pypi.org/project/matplotlib/) - library that creates visualization, like various graphs
 
 - [ArgsParse](https://docs.python.org/3/library/argparse.html) - parser for command-line options and arguments
 
-- [Colored Library](https://pypi.org/project/colored/) - this library is used for color and formatting in command line
+- [Colored Library](https://pypi.org/project/colored/) - library used for color and formatting in command line
 
 
 
