@@ -40,7 +40,8 @@ pip install colored
 Now that set up is complete, you can run the CLI! Follow these steps: 
 1. Open command line 
 2. In command line, navigate to the cloned repository directory 
-3. Run the following script, entering in the GitHub username you would like to see metrics for: 
+3. Enter your own GitHub credentials-- your username and access token. Update the `access_token` and `user` fields in `metrics_test.py` 
+4. Run the following script, entering in the GitHub username you would like to see metrics for: 
 
 ```
 python3 metrics.py <github_username>
@@ -51,10 +52,17 @@ This CLI uses argparser to take in arguments. To see the possible arguments it w
 ```
 python3 metrics.py -h
 ```
-
+As of right now, the CLI also accepts two optional flags: 
+` --save` :
+`--gr` :
 
 
 ## Test
+The unit tests are written in `metrics_test.py`. 
+Run the following command to run the tests: 
+```
+python3 -m unittest metrics_test.py
+```
 
 
 
