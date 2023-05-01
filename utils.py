@@ -2,7 +2,9 @@ from prettytable import PrettyTable
 import matplotlib.pyplot as plt
 
 
-# find keys with specific value and return as str
+# methods used for formatting output and creating graphs
+
+# find keys with specific value and return as formatted str
 def get_keys(dict:dict) ->str:
     val = max(dict.values())
     if val == 0:
@@ -16,6 +18,7 @@ def get_keys(dict:dict) ->str:
     return res[:-2]
 
 
+# prints table with values in descending order
 def create_sorted_table(dict:dict, col1:str, col2:str) -> PrettyTable:
     table = PrettyTable([col1, col2])
     for key in dict:

@@ -5,8 +5,8 @@ from colored import fg
 import utils
 
 
-access_token = "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"
-user = 'shry678'
+access_token = 'ENTER YOUR ACCESS TOKEN'
+user = 'ENTER USERNAME'
 base_url = 'https://api.github.com/'
 
 
@@ -33,10 +33,11 @@ def get_total_repos(username:str) -> int:
 def get_lang_freq(username:str, repo_data:json) -> dict:
     lang_freq = dict()
 
-    # look at each repo to count frequency of each language 
+    # for each repo, view the languages used 
     for repo in repo_data:
         url = base_url + 'repos/' + username + '/' + repo['name'] + '/languages'
         lang_data = requests.get(url, auth=(user, access_token))
+        # update frequency of language
         for lang in lang_data.json():
             lang_freq[lang] = lang_freq.get(lang, 0) + 1
         
@@ -63,15 +64,16 @@ def get_fork_count(repo_data:json) -> dict:
     return fork_count
 
 
-# returns weekly frequency of commits over one year period
+# returns dict with weekly frequency of commits over one year period
 def get_commit_freq(username:str, repo_data:json) -> dict:
     weekly_commit = dict()
 
-    # for each repo, parse 
+    # for each repo, view weekly commit stats 
     for repo in repo_data:
         url = base_url + 'repos/' + username + '/' + repo['name'] + '/stats/participation'
         commit_data = requests.get(url, auth=(username, access_token))
         count = 1
+        # sum commit number for each week across all repos
         for stat in commit_data.json()['owner']:
             curr_week = 'W' + str(count)
             weekly_commit[curr_week] = weekly_commit.get(curr_week, 0) + stat
@@ -88,10 +90,10 @@ def main():
     # Create the parser and add arguments
     parser = argparse.ArgumentParser()
     parser.add_argument(dest='username', type=str, help="Enter GitHub username")
-    parser.add_argument('--save', default=False, action='store_true', help = "optional flag to save data")
-    parser.add_argument('--gr', default=False, action='store_true', help = "optional flag to generate and save graph image")
+    parser.add_argument('--save', default=False, action='store_true', help = "optional flag to save retrieved data")
+    parser.add_argument('--gr', default=False, action='store_true', help = "optional flag to generate and save graph images")
 
-    # Parse and print the results
+    # Parse the results
     args = parser.parse_args()
     username = args.username
     save = args.save
@@ -99,6 +101,7 @@ def main():
 
     data = authenticate(username)
 
+    # output results
     print(mg + "Total number of public repositories: " + gr +  str(get_total_repos(username)) + '\n\n')
 
     lang_freq = get_lang_freq(username, data)
@@ -116,13 +119,15 @@ def main():
     weekly_commit = get_commit_freq(username, data)
     print(mg + 'Weekly Commits \n' + wh + str(utils.create_table(weekly_commit, 'Week', 'Commit Count')))
     
+    # save and format retrieved dicts in JSON file
     if(save):
         all_dicts = {'lang_freq': lang_freq, 'fork_count': fork_count, 
                      'star_count': star_count, 'weekly_freq':weekly_commit}
         
         with open("retrieved_data.json", "w") as outfile: 
-            json.dump(dict, outfile, indent=4)
+            json.dump(all_dicts, outfile, indent=4)
 
+    # create graphs
     if(graph):
         utils.create_pie_graph(lang_freq, 'lang')
         utils.create_bar_graph(fork_count, 'forks')

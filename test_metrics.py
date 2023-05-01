@@ -7,7 +7,7 @@ base_url = metrics.base_url
 access_token = metrics.access_token
 user = metrics.user
 
-# unit tests for 
+# unit tests for metrics.py
 class MetricsTest(unittest.TestCase):
     def test_authenticate(self):
         with open('test_data.json') as user_file:
@@ -32,8 +32,8 @@ class MetricsTest(unittest.TestCase):
             data = user_file.read()
         
         mock_json = json.loads(data)
-        response = metrics.authenticate(user)
         mock_lang = metrics.get_lang_freq(user, mock_json)
+        response = metrics.authenticate(user)
         lang = metrics.get_lang_freq(user, response)
 
         assert mock_lang == lang
