@@ -5,8 +5,8 @@ from colored import fg
 import utils
 
 
-access_token = 'ENTER YOUR ACCESS TOKEN'
-user = 'ENTER USERNAME'
+access_token = 'ENTER_ACCESS_TOKEN'
+user = 'ENTER_YOUR_USERNAME'
 base_url = 'https://api.github.com/'
 
 
