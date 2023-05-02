@@ -74,6 +74,7 @@ Cases to try:
 
 Unit tests are written in `test_metrics.py`. The unit tests compare the actual API responses to mock JSON data for user `shry678`.
 Make sure to update the `user` field in metrics.py with `shry678`
+
 Run the following command to run the tests: 
 ```
 python3 -m unittest test_metrics.py
