@@ -72,7 +72,7 @@ Cases to try:
 -  Run the script with a username that has many repositories (i.e. user: `postmodern`) and save the graph images generated. You should expect to see 4 graph images saved as .png's in the project directory!  
 
 
-Unit tests are written in `metrics_test.py`. The unit tests compare the actual API responses to mock JSON data. 
+Unit tests are written in `test_metrics.py`. The unit tests compare the actual API responses to mock JSON data. 
 Run the following command to run the tests: 
 ```
 python3 -m unittest test_metrics.py
