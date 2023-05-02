@@ -68,8 +68,8 @@ As you will see from the output, the CLI also accepts two optional flags:
 Try running the script with different usernames and the optional parameters. 
 
 Cases to try: 
-- Try entering a GitHub username that does not exist
-- Try running the command with a username that has many repositories (i.e. user: `postmodern`) and save the graph images generated.  
+-  Run the script with a GitHub username that does not exist. You should expect to see a 404 Error message in command line.
+-  Run the script with a username that has many repositories (i.e. user: `postmodern`) and save the graph images generated. You should expect to see 4 graph images saved as .png's in the project directory!  
 
 
 Unit tests are written in `metrics_test.py`. The unit tests compare the actual API responses to mock JSON data. 
